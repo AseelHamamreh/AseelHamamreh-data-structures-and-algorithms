@@ -99,6 +99,11 @@ const addValues = (arr, value) => {
 
 const addNumbers = (num, arr, times, callback) => {
   // Solution code here...
+  const newArray=arr;
+  for(let i=0;i<times;i++){
+    callback(newArray,num);
+  }
+  return newArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
