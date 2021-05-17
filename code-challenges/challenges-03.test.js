@@ -8,11 +8,11 @@ Write a function called addTwo that takes in an array and adds two to every valu
 
 const addTwo = (arr) => {
   // Solution code here...
-  const array1 =[];
+  const newArr=[];
   for(let i=0;i<arr.length;i++){
-    array1.push(arr[i]+2);
+    newArr.push(arr[i]+=2);
   }
-  return array1;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -25,8 +25,11 @@ For example, typeNum([1, 'bob' ,3]) returns [1,3].
 
 const typeNum = (arr) => {
   // Solution code here...
-  const filtering = arr.filter(currentValue => typeof currentValue ==='number');
-  return filtering;
+  const newArr = arr.filter(a=>{
+    return typeof a === 'number';
+  });
+  return newArr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -39,8 +42,10 @@ For example, containsAnd(['panda', 'ran', 'and']) returns ['panda', 'and'].
 
 const containsAnd = (arr) => {
   // Solution code here...
-  const filtering = arr.filter(currentValue => currentValue.includes('and'));
-  return filtering;
+  const newArr = arr.filter(a=>{
+    return a.includes('and');
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -53,8 +58,10 @@ For example, oddValues([1,2,3]) returns [1,3].
 
 const oddValues = (arr) => {
   // Solution code here...
-  const filtering = arr.filter(currentValue => (currentValue % 2 !== 0));
-  return filtering;
+  const newArr = arr.filter(a=>{
+    return a %2 !== 0;
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -67,8 +74,10 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 
 const notInFirstArray = (forbiddenValues, arr) => {
   // Solution code here...
-  const filtering = arr.filter(currentValue => (!forbiddenValues.includes(currentValue)));
-  return filtering;
+  const newArr = arr.filter(a=>{
+    return !forbiddenValues.includes(a);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -112,6 +121,10 @@ const snorlaxData = {
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
   // Solution code here...
+  const newArr = arr.filter(a=>{
+    return a.baseStat > minBaseStat;
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -124,6 +137,13 @@ For example, getStatName(snorlaxData.stats, 50) will return ['special-defense', 
 
 const getStatName = (arr, minBaseStat) => {
   // Solution code here...
+  const newArr=[];
+  arr.forEach(a=>{
+    if(a.baseStat>minBaseStat){
+      newArr.push(a.stat.name);
+    }
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -177,8 +197,11 @@ const characters = [
 
 const getCharactersWithoutChildren = (arr) => {
   // Solution code here...
+  const newArr = arr.filter((a,i)=>{
+    return !a[i].includes(a.children);
+  });
+  return newArr;
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
 
@@ -189,6 +212,18 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 
 const evenOddNumericValues = (arr) => {
   // Solution code here...
+  const newArr = arr.filter(a=>{
+    return typeof a === 'number';
+  });
+  const newArr2 = newArr.map(a=>{
+    if(a % 2 === 0){
+      return 'even';
+    }
+    else{
+      return 'odd';
+    }
+  });
+  return newArr2;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -259,7 +294,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return an array containing the stats that are greater than the input', () => {
     expect(getBaseStatGreaterThan(snorlaxData.stats, 75)).toStrictEqual([ { stat: { url: 'https://pokeapi.co/api/v2/stat/5/', name: 'special-defense' }, effort: 2, baseStat: 110 } ]);
     expect(getBaseStatGreaterThan(snorlaxData.stats, 75).length).toStrictEqual(1);
@@ -270,7 +305,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return the name of the stats that exceed that maximum', () => {
     expect(getStatName(snorlaxData.stats, 50)).toStrictEqual([ 'special-defense', 'special-attack' ]);
     expect(getStatName(snorlaxData.stats, 50).length).toStrictEqual(2);
@@ -298,7 +333,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should remove non-integers and return "even" or "odd', () => {
     expect(evenOddNumericValues(['Gregor', 2, 4, 1])).toStrictEqual(['even', 'even', 'odd']);
     expect(evenOddNumericValues(['Gregor', 2, 4, 1]).length).toStrictEqual(3);

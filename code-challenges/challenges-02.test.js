@@ -10,27 +10,25 @@ Write a function named raisedToTheThird that takes in an array of numbers and re
 
 const raisedToTheThird = (arr) => {
   // Solution code here...
-  const array1 =[];
-  arr.forEach(value => {
-    let number = Math.pow(value,3);
-    array1.push(number);
+  const newArr =[];
+  arr.forEach(a =>{
+    newArr.push(Math.pow(a,3));
   });
-  return array1;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
-Write a function named addOne that, given an array of numbers, uses map to return a new array with each value simply incremented by 1. 
+Write a function named addOne that, given an array of numbers, uses map to return a new array with each value simply incremented by 1.
 ------------------------------------------------------------------------------------------------ */
 
 const addOne = (arr) => {
   // Solution code here...
-  const array2 =[];
-  arr.map(value =>{
-    array2.push(value +1);
+  const newArr = arr.map(a =>{
+    return a+1;
   });
-  return array2;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -41,11 +39,10 @@ Write a function named addQuestion that, given an array of strings, uses map to 
 
 const addQuestion = (arr) => {
   // Solution code here...
-  const array3 =[];
-  arr.map(value =>{
-    array3.push(value.concat('?'));
+  const newArr = arr.map(a =>{
+    return a+'?';
   });
-  return array3;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -60,16 +57,16 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 
 const forLoopTwoToThe = (arr) => {
   // Solution code here...
-  const array4=[];
-  for(let i=0; i <arr.length;i++){
-    if ( arr[i] !==0 ){
-      array4.push(Math.pow(2,arr[i]));
+  const newArr=[];
+  for (let i=0;i<arr.length;i++){
+    if(arr[i]===0){
+      newArr.push(1);
     }
     else{
-      array4.push(1);
+      newArr.push(Math.pow(2,arr[i]));
     }
   }
-  return array4;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -80,17 +77,16 @@ Write a function named forEachTwoToThe that produces the same output as your for
 
 const forEachTwoToThe = (arr) => {
   // Solution code here...
-  const array5=[];
-  arr.forEach((value ,index) =>{
-    if ( arr[index] !==0 ){
-      array5.push(Math.pow(2,arr[index]));
+  const newArr=[];
+  arr.forEach(a=>{
+    if(a === 0){
+      newArr.push(1);
     }
     else{
-      array5.push(1);
+      newArr.push(Math.pow(2,a));
     }
-
   });
-  return array5;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -101,17 +97,15 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 
 const mapTwoToThe = (arr) => {
   // Solution code here...
-  const array6=[];
-  arr.map((value ,index) =>{
-    if ( arr[index] !==0 ){
-      array6.push(Math.pow(2,arr[index]));
+  const newArr = arr.map(a=>{
+    if(a === 0){
+      return 1;
     }
     else{
-      array6.push(1);
+      return Math.pow(2,a);
     }
-
   });
-  return array6;
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -126,6 +120,10 @@ For example: charCode(['h','i']) returns [104, 105].
 
 const charCode = (arr) => {
   // Solution code here...
+  const newArr =arr.map(a=>{
+    return a.charCodeAt(0);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -140,6 +138,20 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 
 const evenOdd = (arr) => {
   // Solution code here...
+  const newArr = arr.map(a=>{
+    if(typeof a === 'number'){
+      if(a % 2 === 0){
+        return 'even';
+      }
+      else{
+        return 'odd';
+      }
+    }
+    else{
+      return 'N/A';
+    }
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,6 +198,10 @@ const snorlaxAbilities = {
 
 const extractAbilities = (arr) => {
   // Solution code here...
+  const newArr = arr.map(a=>{
+    return(a.ability.name);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -233,6 +249,11 @@ const snorlaxStats = {
 
 const extractStats = (arr) => {
   // Solution code here...
+  const newArr=[];
+  arr.map(a=>{
+    newArr.push(`name: ${a.stat.name},total: ${a.effort+a.baseStat}`);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -297,14 +318,14 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return an array containing the character code for each letter', () => {
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1'])).toStrictEqual([ 67, 111, 100, 101, 51, 48, 49 ]);
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1']).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return an array containing the keys from an object', () => {
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541])).toStrictEqual([ 'odd', 'even', 'even', 'even', 'odd', 'odd', 'even', 'odd' ]);
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541]).length).toStrictEqual(8);
@@ -326,7 +347,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should return an array containing only the ability names', () => {
     expect(extractAbilities(snorlaxAbilities.abilities)).toStrictEqual(['gluttony', 'cute charm', 'immunity']);
     expect(extractAbilities(snorlaxAbilities.abilities).length).toStrictEqual(3);
